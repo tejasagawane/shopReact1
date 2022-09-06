@@ -1,0 +1,52 @@
+.error {
+  color: red;
+  font-size: small;
+}
+
+.div_form {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* label {
+  float: left;
+  width: 10em;
+  margin-right: 1em;
+} */
+/* }
+
+.form_controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form_actions {
+  text-align: left;
+}
+
+input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+} */
