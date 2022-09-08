@@ -240,12 +240,14 @@ import "./App.css";
 import React from "react";
 // import ProductList1 from "./Components/Fetch/ProductList1";
 import ProductAppBar from "./Components/Fetch/ProductAppBar";
+import SignInSide from "./Login/SignInSide";
 function App() {
   return (
     <div className="App">
-      <h1>Shoes shop application</h1>
+      {/* <h1>Shoes shop application</h1> */}
       {/* <ProductList1 /> */}
-      <ProductAppBar />
+      {/* <ProductAppBar /> */}
+      <SignInSide />
       {/* <img src={myshop} height={500} width={1250} /> */}
     </div>
   );
