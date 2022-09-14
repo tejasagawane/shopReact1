@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {
   AppBar,
   backdropClasses,
   Tabs,
   Toolbar,
   Typography,
+  Container,
 } from "@mui/material";
+import AdbIcon from '@mui/icons-material/Adb';
 import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import StoreIcon from "@mui/icons-material/Store";
@@ -17,6 +19,16 @@ import StakeHolderForm from "../Forms/StakeHolderForm";
 import ColorForm from "../Forms/ColorForm";
 import CategoryForm from "../Forms/CategoryForm";
 import SoldProductList from "./SoldProductList";
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { UserContext } from "../../Login/Context/LoginContext";
+
 // import myshop from "../../myshop.jpg";
 
 function ProductAppBar() {
@@ -28,6 +40,24 @@ function ProductAppBar() {
   const [addColor, setAddColor] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [soldProduct, setSoldProduct] = useState(false);
+
+  const settings = ['Logout'];
+  const [user, setUser] = useContext(UserContext);
+  
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+    setUser();
+  };
 
   const openAddComponent = () => {
     setAddStock(true);
@@ -100,16 +130,12 @@ function ProductAppBar() {
   };
   return (
     <div>
-      <React.Fragment>
-        <AppBar sx={{ background: "#342830" }}>
-          <Toolbar>
-            {/* <ShopTwoIcon /> */}
-            {/* <LocalMallIcon /> */}
-            <StoreIcon />
-            <Typography>Subhash Shoe Mart Baramati </Typography>
-            <StoreIcon />
-            {/* <LocalMallIcon /> */}
-            <Tabs
+    <AppBar sx={{ background: "#342830" }} position="static" enableColorOnDark>
+    <Container maxWidth="xl">
+      <Toolbar disableGutters>
+               
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        <Tabs
               textColor="inherit"
               value={value}
               onChange={(e, value) => {
@@ -128,18 +154,49 @@ function ProductAppBar() {
               <Tab label="Add Brand" onClick={openBrandComponent}></Tab>
               <Tab label="Add category" onClick={openCategoryComponent}></Tab>
             </Tabs>
-          </Toolbar>
-        </AppBar>
-        {addStock ? <ProductForm /> : null}
+        </Box>
+
+        <Box sx={{ flexGrow: 0 }}>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </Toolbar>
+    </Container>
+  </AppBar>
+
+     {addStock ? <ProductForm /> : null}
         {updateStock ? <ProductList1 /> : null}
         {soldProduct ? <SoldProductList /> : null}
         {addBrand ? <BrandForm /> : null}
         {addStakeHolder ? <StakeHolderForm /> : null}
         {addCategory ? <CategoryForm /> : null}
         {addColor ? <ColorForm /> : null}
-        {/* <img src={myshop} height={500} width={1250} /> */}
-      </React.Fragment>
-    </div>
+  </div>
   );
 }
 

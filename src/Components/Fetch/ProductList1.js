@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import "../../App.css";
 import { forwardRef } from "react";
 import Avatar from "react-avatar";
@@ -22,7 +22,8 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Alert from "@material-ui/lab/Alert";
 import axios from "../../api/axios";
-const URL = "/api/v1/shop/products";
+import { UserContext } from "../../Login/Context/LoginContext";
+const URL = "/products";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -55,9 +56,7 @@ const tableIcons = {
 // }
 
 function ProductList1() {
-  const abValueGetter = () => {
-    return 2 + 8;
-  };
+  const [user] = useContext(UserContext);
 
   var columns = [
     { title: "id", field: "id", hidden: true },
@@ -94,7 +93,12 @@ function ProductList1() {
 
   useEffect(() => {
     axios
-      .get(URL)
+    .get(URL,  {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : "Bearer "+user
+      },
+    })
       .then((res) => {
         //setData(res.data.data);
 
@@ -122,7 +126,13 @@ function ProductList1() {
 
     if (errorList.length < 1) {
       axios
-        .put(URL + newData.id, newData)
+        //.put(URL + newData.id, newData)
+        .put(URL +"/"+ newData.id, newData,  {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer "+user
+          },
+        })
         .then((res) => {
           const dataUpdate = [...data];
           const index = oldData.tableData.id;
@@ -183,7 +193,13 @@ function ProductList1() {
 
   const handleRowDelete = (oldData, resolve) => {
     axios
-      .delete(URL + oldData.id)
+      // .delete(URL + oldData.id)
+      .delete(URL +"/"+ oldData.id,  {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
+        },
+      })
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;

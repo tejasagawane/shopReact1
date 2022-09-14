@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "../../api/axios";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
+import { UserContext } from "../../Login/Context/LoginContext";
+
+const URL = "/api/v1/staticDropdown/brands";
 
 function Brand(props) {
   const [brands, setBrands] = useState([]);
-
+  const [user] = useContext(UserContext);
   useEffect(() => {
+    // axios
+    //   .get("http://localhost:8080/api/v1/staticDropdown/brands")
+    
+
     axios
-      .get("http://localhost:8080/api/v1/staticDropdown/brands")
+      .get(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
+        },
+      })
       .then((response) => {
         const data = response.data;
         setBrands([...brands, ...data]);

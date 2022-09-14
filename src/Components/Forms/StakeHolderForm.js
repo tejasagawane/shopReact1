@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
+import { UserContext } from "../../Login/Context/LoginContext";
 const URL = "/api/v1/staticDropdown/stakeHolder/add";
 
 function StakeHolderForm() {
@@ -12,6 +13,7 @@ function StakeHolderForm() {
     billAmount: "",
     paidAmount: "",
   });
+  const [user] = useContext(UserContext);
 
   const [myData, setMyData] = useState("");
 
@@ -42,6 +44,7 @@ function StakeHolderForm() {
       .post(URL, data, {
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
         },
       })
       .then((response) => {

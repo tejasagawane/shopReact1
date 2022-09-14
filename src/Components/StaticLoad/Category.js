@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "../../api/axios";
 import { TextField } from "@mui/material";
+import { UserContext } from "../../Login/Context/LoginContext";
+const URL = "/api/v1/staticDropdown/categories";
 
 function Category(props) {
   const [categories, setCategories] = useState([]);
+  const [user] = useContext(UserContext);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/staticDropdown/categories")
+      //.get("http://localhost:8080/api/v1/staticDropdown/categories")
+      .get(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
+        },
+      })
       .then((response) => {
         const data = response.data;
         setCategories([...categories, ...data]);

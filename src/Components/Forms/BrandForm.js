@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
+import { UserContext } from "../../Login/Context/LoginContext";
 const URL = "/api/v1/staticDropdown/brand/add";
+
 
 function BrandForm(props) {
   const [brandName, setBrandName] = useState("");
+  const [user] = useContext(UserContext);
 
   const changeHandler = (e) => {
     setBrandName(e.target.value);
@@ -23,6 +26,7 @@ function BrandForm(props) {
       .post(URL, data, {
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
         },
       })
       .then((response) => {

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
+import { UserContext } from "../../Login/Context/LoginContext";
 const URL = "/api/v1/staticDropdown/color/add";
 
 function ColorForm() {
   const [colorName, setColorName] = useState("");
-
+  const [user] = useContext(UserContext);
   const changeHandler = (e) => {
     setColorName(e.target.value);
     //console.log(colorName);
@@ -22,6 +23,7 @@ function ColorForm() {
       .post(URL, data, {
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : "Bearer "+user
         },
       })
       .then((response) => {

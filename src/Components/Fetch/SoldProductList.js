@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../App.css";
 import { forwardRef } from "react";
 import Avatar from "react-avatar";
 import Grid from "@material-ui/core/Grid";
-
+import { UserContext } from "../../Login/Context/LoginContext";
 import MaterialTable, { MTablePagination } from "material-table";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -24,7 +24,7 @@ import Alert from "@material-ui/lab/Alert";
 import { Pagination, Typography } from "@mui/material";
 import { TablePagination } from "@material-ui/core";
 import axios from "../../api/axios";
-const URL = "/api/v1/shop/soldProducts";
+const URL = "/soldProducts";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -58,7 +58,7 @@ const tableIcons = {
 
 function SoldProductList() {
   const [tl, setTl] = useState(0);
-
+  const [user] = useContext(UserContext);
   var columns = [
     { title: "id", field: "id", hidden: true },
     {
@@ -89,8 +89,8 @@ function SoldProductList() {
       title: "Profit",
       render: (rowData) =>
         rowData.sellingPrice != 0
-          ? rowData.sellingPrice -
-            (rowData.costOfPrice + (rowData.costOfPrice * rowData.gst) / 100)
+          ? Math.round(rowData.sellingPrice -
+          (rowData.costOfPrice + (rowData.costOfPrice * rowData.gst) / 100))
           : 0,
     },
   ];
@@ -105,7 +105,12 @@ function SoldProductList() {
 
   useEffect(() => {
     axios
-      .get(URL)
+    .get(URL,  {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : "Bearer "+user
+      },
+    })
       .then((res) => {
         //setData(res.data.data);
 
@@ -155,7 +160,7 @@ function SoldProductList() {
                           data.reduce(
                             (agg, row) =>
                               agg +
-                              (row.sellingPrice -
+                              Math.round(row.sellingPrice -
                                 (row.costOfPrice +
                                   (row.costOfPrice * row.gst) / 100)),
                             0

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Brand from "../StaticLoad/Brand";
 import Color from "../StaticLoad/Color";
 import Category from "../StaticLoad/Category";
@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 // import myshop from "../../myshop.jpg";
 import axios from "../../api/axios";
-const URL = "/api/v1/shop/add";
+import { UserContext } from "../../Login/Context/LoginContext";
+const URL = "/add";
 
 function ProductForm() {
   const initialValues = {
@@ -27,7 +28,7 @@ function ProductForm() {
     status: "",
   };
   const [product, setProduct] = useState(initialValues);
-
+  const [user] = useContext(UserContext);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -128,6 +129,7 @@ function ProductForm() {
         .post(URL, data, {
           headers: {
             "Content-Type": "application/json",
+            "Authorization" : "Bearer "+user
           },
         })
         .then((response) => {
