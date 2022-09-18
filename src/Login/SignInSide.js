@@ -130,7 +130,6 @@ export default function SignInSide() {
         const data1 = response.data;
         //alert(data1);
         setToken(data1);
-        //setSession('New Value')
         setUser(data1)
         // const userData = {
         //   un : userName,
@@ -138,7 +137,6 @@ export default function SignInSide() {
         // }
         // setUser([...user, ...userData]);
         // setAuth({ userName, password,token });
-        console.log(data1);
         alert("Logged In successfully..");
       })
       .catch((error) => {

@@ -24,6 +24,9 @@ import Alert from "@material-ui/lab/Alert";
 import { Pagination, Typography } from "@mui/material";
 import { TablePagination } from "@material-ui/core";
 import axios from "../../api/axios";
+import {
+  Stack,
+} from "@mui/material";
 const URL = "/soldProducts";
 
 const tableIcons = {
@@ -57,7 +60,6 @@ const tableIcons = {
 // }
 
 function SoldProductList() {
-  const [tl, setTl] = useState(0);
   const [user] = useContext(UserContext);
   var columns = [
     { title: "id", field: "id", hidden: true },
@@ -126,10 +128,11 @@ function SoldProductList() {
   //alert(tl);
 
   return (
-    <div className="App">
-      <Grid container spacing={1}>
+    // <div className="App">
+    <Stack>
+      {/* <Grid container spacing={1}>
         <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10}> */}
           <div>
             {iserror && (
               <Alert severity="error">
@@ -181,11 +184,18 @@ function SoldProductList() {
                 </div>
               ),
             }}
+            options={{
+              exportButton: true, grouping: true ,  headerStyle: {
+                backgroundColor: '#01579b',
+                color: '#FFF'
+              }
+            }}
           />
-        </Grid>
+        {/* </Grid>
         <Grid item xs={3}></Grid>
-      </Grid>
-    </div>
+      </Grid> */}
+    {/* </div> */}
+    </Stack>
   );
 }
 

@@ -3,6 +3,11 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
 import { UserContext } from "../../Login/Context/LoginContext";
+import {
+  Typography,
+  Stack,
+  InputAdornment
+} from "@mui/material";
 const URL = "/api/v1/staticDropdown/stakeHolder/add";
 
 function StakeHolderForm() {
@@ -61,7 +66,8 @@ function StakeHolderForm() {
 
   return (
     <div className="div_form">
-      <h2>Add Brand</h2>
+      {/* <h2>Add StakeHolder</h2> */}
+      <Typography>Add StakeHolder</Typography>
       <form onSubmit={handleSubmit}>
         <div>
           {/* <label>StakeHolder Name : </label>
@@ -81,6 +87,7 @@ function StakeHolderForm() {
             fullWidth="true"
             value={stakeHolder.name}
             onChange={changeHandler}
+           
           />
           <p></p>
         </div>
@@ -148,6 +155,9 @@ function StakeHolderForm() {
             fullWidth="true"
             value={stakeHolder.billAmount}
             onChange={changeHandler}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+            }}
           />
           <p></p>
         </div>
@@ -169,6 +179,9 @@ function StakeHolderForm() {
             fullWidth="true"
             value={stakeHolder.paidAmount}
             onChange={changeHandler}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+            }}
           />
           <p></p>
         </div>

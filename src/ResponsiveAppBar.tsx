@@ -1,41 +1,34 @@
+// import * as React from 'react';
 import React, { useState,useContext } from "react";
-import {
-  AppBar,
-  backdropClasses,
-  Tabs,
-  Toolbar,
-  Typography,
-  Container,
-  Stack,
-} from "@mui/material";
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import AdbIcon from '@mui/icons-material/Adb';
-import ShopTwoIcon from "@mui/icons-material/ShopTwo";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
-import StoreIcon from "@mui/icons-material/Store";
-import { Tab } from "@material-ui/core";
-import ProductList1 from "./ProductList1";
-import ProductForm from "../Forms/ProductForm";
-import BrandForm from "../Forms/BrandForm";
-import StakeHolderForm from "../Forms/StakeHolderForm";
-import ColorForm from "../Forms/ColorForm";
-import CategoryForm from "../Forms/CategoryForm";
-import SoldProductList from "./SoldProductList";
+import Stack from '@mui/material/Stack';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import StakeHolderSearch from "../Forms/StakeHolderSearch";
-import { UserContext } from "../../Login/Context/LoginContext";
+import AdbIcon from '@mui/icons-material/Adb';
+import StakeHolderForm from "./Components/Forms/StakeHolderForm";
+import ProductForm from "./Components/Forms/ProductForm";
+import BrandForm from "./Components/Forms/BrandForm";
+import ColorForm from "./Components/Forms/ColorForm";
+import CategoryForm from "./Components/Forms/CategoryForm";
+import StakeHolderSearch from "./Components/Forms/StakeHolderSearch";
+import SoldProductList from "./Components/Fetch/SoldProductList";
+import ProductList1 from "./Components/Fetch/ProductList1";
+import { UserContext } from "./Login/Context/LoginContext";
 
-// import myshop from "../../myshop.jpg";
+const pages = ['Add Stock', 'Update Stock', 'Sell', 'StakeHolder'];
+const settings = ['StakeHolder', 'Brand', 'Color', 'Category','Logout'];
 
-function ProductAppBar() {
-  const [user, setUser] = useContext(UserContext);  
+const ResponsiveAppBar = () => {
+  //const [user, setUser] = useContext(UserContext);  
   const [value, setValue] = useState();
   const [addStock, setAddStock] = useState(false);
   const [updateStock, setUpdateStock] = useState(false);
@@ -45,13 +38,13 @@ function ProductAppBar() {
   const [addColor, setAddColor] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [soldProduct, setSoldProduct] = useState(false);
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -63,7 +56,7 @@ function ProductAppBar() {
     setAnchorElUser(null);
   };
   
-  const handleCloseNavMenuAddStock = (e) => {
+  const handleCloseNavMenuAddStock = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     setAnchorElNav(null);
     setAddStock(true);
@@ -76,7 +69,7 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   };
 
-  const handleCloseNavMenuUpdateStock = (e) => {
+  const handleCloseNavMenuUpdateStock = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     setAnchorElNav(null);
     setAddStock(false);
@@ -89,7 +82,7 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   };
 
-  const handleCloseNavMenuSell = (e) => {
+  const handleCloseNavMenuSell = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     setAnchorElNav(null);
     setAddStock(false);
@@ -102,33 +95,33 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   };
 
-  const handleCloseNavMenuStakeHolder = (e) => {
+  const handleCloseNavMenuStakeHolder = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     setAnchorElNav(null);
-    setSearchStakeHolder(true);
     setAddStock(false);
     setUpdateStock(false);
-    setAddStakeHolder(false);
-    setAddBrand(false);
-    setAddColor(false);
-    setAddCategory(false);
-    setSoldProduct(false);
-  };
-
-  const handleCloseUserMenuStakeHolder = (e) => {   
-    e.preventDefault();
-    setAnchorElUser(null);
     setAddStakeHolder(true);
-    setAddStock(false);
-    setUpdateStock(false);
     setAddBrand(false);
     setAddColor(false);
     setAddCategory(false);
     setSoldProduct(false);
     setSearchStakeHolder(false);
+  };
+
+  const handleCloseUserMenuStakeHolder = (e: React.ChangeEvent<any>) => {   
+    e.preventDefault();
+    setAnchorElUser(null);
+    setSearchStakeHolder(true);
+    setAddStakeHolder(false);
+    setAddStock(false);
+    setUpdateStock(false);
+    setAddBrand(false);
+    setAddColor(false);
+    setAddCategory(false);
+    setSoldProduct(false);
   }
 
-  const handleCloseUserMenuBrand = (e) => {   
+  const handleCloseUserMenuBrand = (e: React.ChangeEvent<any>) => {   
     e.preventDefault();
     setAnchorElUser(null);
     setAddBrand(true);
@@ -141,7 +134,7 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   }
 
-  const handleCloseUserMenuColor = (e) => {   
+  const handleCloseUserMenuColor = (e: React.ChangeEvent<any>) => {   
     e.preventDefault();
     setAnchorElUser(null);
     setAddColor(true);
@@ -154,7 +147,7 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   }
 
-  const handleCloseUserMenuCategory = (e) => {   
+  const handleCloseUserMenuCategory = (e: React.ChangeEvent<any>) => {   
     e.preventDefault();
     setAnchorElUser(null);
     setAddColor(false);
@@ -167,79 +160,13 @@ function ProductAppBar() {
     setSearchStakeHolder(false);
   }
 
-  const handleCloseUserMenuLogOut = (e) => {   
-    setAnchorElUser(null);
-    setUser();
-  }
-
-  const handleOnChangeUserMenu = (e) => {
-   
-    setValue(e.target.innerText)
-    alert(value);
+  const handleOnChangeUserMenu = (e: React.ChangeEvent<any>) => {
    
     //e.preventDefault();
     //setAnchorElUser(null);
-   if(e.target.innerHTML = 'Add Stock') {
-    
-      setAddStock(true);
-      setUpdateStock(false);
-      setAddStakeHolder(false);
-      setAddBrand(false);
-      setAddColor(false);
-      setAddCategory(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Update Stock') {
-      setUpdateStock(true);
-      setAddStock(false);
-      setAddStakeHolder(false);
-      setAddBrand(false);
-      setAddColor(false);
-      setAddCategory(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Sell') {
-      setSoldProduct(true);
-      setAddStock(false);
-      setUpdateStock(false);
-      setAddStakeHolder(false);
-      setAddBrand(false);
-      setAddColor(false);
-      setAddCategory(false);
-    } else if(e.target.innerHTML = 'StakeHolder') {
-      setAddStakeHolder(true);
-      setAddStock(false);
-      setUpdateStock(false);
-      setAddBrand(false);
-      setAddColor(false);
-      setAddCategory(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Brand') {
-      setAddBrand(true);
-      setAddStock(false);
-      setUpdateStock(false);
-      setAddStakeHolder(false);
-      setAddColor(false);
-      setAddCategory(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Color') {
-      setAddColor(true);
-      setAddStock(false);
-      setUpdateStock(false);
-      setAddStakeHolder(false);
-      setAddBrand(false);
-      setAddCategory(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Category') {
-      setAddCategory(true);
-      setAddStock(false);
-      setUpdateStock(false);
-      setAddStakeHolder(false);
-      setAddBrand(false);
-      setAddColor(false);
-      setSoldProduct(false);
-    } else if(e.target.innerHTML = 'Logout') {
+  
       //setUser();
-    }
-  };
+  }
 
   return (
     <Stack>
@@ -247,13 +174,12 @@ function ProductAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <CurrencyRupeeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            // href="/"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -263,9 +189,8 @@ function ProductAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-            
           >
-            SUBHASH SHOE
+            LOGO
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -411,9 +336,6 @@ function ProductAppBar() {
                 <MenuItem onClick={handleCloseUserMenuCategory} >
                   <Typography textAlign="center">Category</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenuLogOut} >
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>        
@@ -432,7 +354,6 @@ function ProductAppBar() {
     </Stack>
     </Stack>
     
-  );
-};
-
-export default ProductAppBar;
+    );
+  };
+export default ResponsiveAppBar;

@@ -3,7 +3,12 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
 import { UserContext } from "../../Login/Context/LoginContext";
+import {
+  Typography,
+  Stack,
+} from "@mui/material";
 const URL = "/api/v1/staticDropdown/brand/add";
+
 
 
 function BrandForm(props) {
@@ -43,7 +48,7 @@ function BrandForm(props) {
 
   return (
     <div className="div_form">
-      <h2>Add Brand</h2>
+      <Typography>Add Brand</Typography>
 
       <form onSubmit={handleSubmit}>
         <TextField

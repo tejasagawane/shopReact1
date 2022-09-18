@@ -9,6 +9,11 @@ import { TextField } from "@mui/material";
 // import myshop from "../../myshop.jpg";
 import axios from "../../api/axios";
 import { UserContext } from "../../Login/Context/LoginContext";
+import {
+  Typography,
+  Stack,
+  InputAdornment
+} from "@mui/material";
 const URL = "/add";
 
 function ProductForm() {
@@ -210,7 +215,8 @@ function ProductForm() {
   return (
     <div className="div_form">
       {/* <img src={myshop} height={400} width={700} /> */}
-      <h1>Add stock entries...</h1>
+      {/* <h1>Add stock entries...</h1> */}
+      <Typography>Add stock</Typography>
       {/* <pre>{JSON.stringify(product, undefined, 2)}</pre> */}
       <form onSubmit={handleSubmit}>
         <div className="form_controls">
@@ -326,6 +332,9 @@ function ProductForm() {
             fullWidth="true"
             value={product.marketRatePrice}
             onChange={changeHandler}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+            }}
           />
           <p>{formErrors.marketRatePrice}</p>
         </div>
@@ -347,6 +356,9 @@ function ProductForm() {
             fullWidth="true"
             value={product.costOfPrice}
             onChange={changeHandler}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+            }}
           />
           <p>{formErrors.costOfPrice}</p>
         </div>
@@ -368,6 +380,9 @@ function ProductForm() {
             fullWidth="true"
             value={product.gst}
             onChange={changeHandler}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">%</InputAdornment>,
+            }}
           />
           <p>{formErrors.gst}</p>
         </div>

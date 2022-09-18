@@ -75,6 +75,7 @@ function ProductList1() {
     { title: "Article", field: "productArticle" },
     { title: "Color", field: "color" },
     { title: "Entry Date", field: "entryDate", width: "20%" },
+    { title: "Selling Date", field: "sellingDate", width: "20%" },
     { title: "Size", field: "size" },
     { title: "Category", field: "category" },
     { title: "MRP", field: "marketRatePrice" },
@@ -216,9 +217,9 @@ function ProductList1() {
 
   return (
     <div className="App">
-      <Grid container spacing={1}>
+      {/* <Grid container spacing={1}>
         <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10}> */}
           <div>
             {iserror && (
               <Alert severity="error">
@@ -247,10 +248,16 @@ function ProductList1() {
                   handleRowDelete(oldData, resolve);
                 }),
             }}
+            options={{
+              exportButton: true, grouping: true,  headerStyle: {
+                backgroundColor: '#01579b',
+                color: '#FFF'
+              }
+            }}
           />
-        </Grid>
+        {/* </Grid>
         <Grid item xs={3}></Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 }

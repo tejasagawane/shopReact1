@@ -3,6 +3,10 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "../../api/axios";
 import { UserContext } from "../../Login/Context/LoginContext";
+import {
+  Typography,
+  Stack,
+} from "@mui/material";
 const URL = "/api/v1/staticDropdown/category/add";
 
 function CategoryForm() {
@@ -40,7 +44,8 @@ function CategoryForm() {
 
   return (
     <div className="div_form">
-      <h2>Add Category</h2>
+      {/* <h2>Add Category</h2> */}
+      <Typography>Add Category</Typography>
       <form onSubmit={handleSubmit}>
         {/* <input
           type="text"
