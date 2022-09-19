@@ -319,7 +319,7 @@ function ProductAppBar() {
               </MenuItem>
             </Menu>
           </Box>
-          <BusinessCenterIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <BusinessCenterIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -336,7 +336,7 @@ function ProductAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SHRINATH SHOES
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {/* {pages.map((page) => (
