@@ -30,6 +30,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import StakeHolderSearch from "../Forms/StakeHolderSearch";
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+
 import { UserContext } from "../../Login/Context/LoginContext";
 
 // import myshop from "../../myshop.jpg";
@@ -248,7 +250,8 @@ function ProductAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <CurrencyRupeeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+          {/* <CurrencyRupeeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/> */}
+          <BusinessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
           <Typography
             variant="h6"
             noWrap
