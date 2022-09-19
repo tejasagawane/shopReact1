@@ -29,7 +29,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="#">
-        Subhash Shoes Mart-Baramati
+        Shrinath Shoes-Bhigwan
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
